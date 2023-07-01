@@ -19,8 +19,8 @@ export function Navbar() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/store" className="text-slate-800 hover:underline">
-                                Store
+                            <Link to="/shop" className="text-slate-800 hover:underline">
+                                Shop
                             </Link>
                         </li>
                     </ul>
