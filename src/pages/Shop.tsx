@@ -3,16 +3,17 @@ import { Link } from 'react-router-dom';
 
 import sectionalCouchImage from '../assets/black-L-couch.jpg';
 import sphereLamp from '../assets/silver-sphere-lamp.jpg';
+import CurrencyFormatUS from "../utilities/CurrencyFormat";
 
 export function Shop() {
 
-    const categories = ['Furniture', 'Storage', 'Beds', 'Kitchen', 'Lighting'];
+    const categories = ['All', 'Furniture', 'Storage', 'Beds', 'Kitchen', 'Lighting'];
     const productData: ProductItem[] = [
         {
             id: '1',
             image: sectionalCouchImage,
             title: 'Sectional Sofa',
-            price: 799.99,
+            price: 1799.99,
             category: 'Furniture',
             description: 'A sectional sofa in black.'
         },
@@ -20,7 +21,7 @@ export function Shop() {
             id: '2',
             image: sphereLamp,
             title: 'Sphere Desk Lamp',
-            price: 29.99,
+            price: 89.99,
             category: 'Lighting',
             description: 'A spherical white desk lamp in silver.'
         }
@@ -37,10 +38,9 @@ export function Shop() {
     return (
         <>
             <ul className="flex justify-center m-5">
-                <li ><button className="m-4 rounded-lg px-4 py-2 border border-slate-500 text-slate-900 hover:border-2 hover:shadow-lg" onClick={() => handleCategoryClick('All')}>All</button></li>
                 {categories.map(category => (
                     <li key={category}>
-                        <button className="m-4 rounded-lg px-4 py-2 border border-slate-500 text-slate-900 hover:border-2 hover:shadow-lg" onClick={() => handleCategoryClick(category)}>
+                        <button className={`m-2 bg-white rounded-lg px-4 py-2 border border-slate-500 text-slate-900 hover:border-2 hover:shadow-lg active:bg-slate-400 active:text-white ${category === selectedCategory ? 'border-2 shadow-lg' : ''}`} onClick={() => handleCategoryClick(category)}>
                             {category}
                         </button>
                     </li>
@@ -51,15 +51,18 @@ export function Shop() {
                 {(selectedCategory === 'All'
                     ? productData
                     : productData.filter((product) => product.category === selectedCategory)
-                ).map((product) => (
-                    <Link to={`/product/${product.id}`} key={product.id}>
-                        <div className="bg-white rounded-lg shadow-lg p-4">
-                            <img className="w-full h-40 object-cover mb-2" src={product.image} alt={product.title} />
-                            <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
-                            <p className="text-gray-600">${product.price.toFixed(2)}</p>
-                        </div>
-                    </Link>
-                ))}
+                ).map((product) => {
+                    const query = encodeURIComponent(JSON.stringify(product));
+                    return (
+                        <Link to={`/product?data=${query}`} key={product.id}>
+                            <div className="bg-white rounded-lg shadow-lg p-4 hover:border-slate-600 hover:border-2">
+                                <img className="w-full h-40 object-cover mb-2" src={product.image} alt={product.title} />
+                                <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
+                                <p className="text-gray-600"><CurrencyFormatUS value={product.price} /></p>
+                            </div>
+                        </Link>
+                    )
+                })}
             </div>
         </>
     )
