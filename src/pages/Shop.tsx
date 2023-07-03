@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import sectionalCouchImage from '../assets/black-L-couch.jpg';
 import sphereLamp from '../assets/silver-sphere-lamp.jpg';
@@ -28,7 +28,14 @@ export function Shop() {
     ]
 
 
-    const [selectedCategory, setSelectedCategory] = useState('All')
+    // use category selected from banner link or 'all' if accessed through shop button
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const categoryData = queryParams.get('data');
+    const categoryArg = categoryData ? JSON.parse(decodeURIComponent(categoryData)) : 'All';
+
+
+    const [selectedCategory, setSelectedCategory] = useState(categoryArg)
 
     // select filter
     const handleCategoryClick = (category: string) => {

@@ -1,3 +1,10 @@
+import BannerSlider from '../components/BannerSlider';
+import banners from '../constants/banners';
+
 export function Home() {
-    return <h1>Home</h1>
+    return (
+        <>
+            <BannerSlider banners={banners} />
+        </>
+    )
 }

@@ -6,3 +6,10 @@ type ProductItem = {
     category: string
     description: string
 }
+
+type BannerData = {
+    imageUrl: string;
+    link: string;
+    category: string;
+    text: string;
+}
