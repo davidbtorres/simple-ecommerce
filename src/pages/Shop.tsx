@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import sectionalCouchImage from '../assets/black-L-couch.jpg';
 import sphereLamp from '../assets/silver-sphere-lamp.jpg';
+import rusticDresser from '../assets/rustic-dresser.jpg'
 import CurrencyFormatUS from "../utilities/CurrencyFormat";
 
 export function Shop() {
@@ -24,6 +25,14 @@ export function Shop() {
             price: 89.99,
             category: 'Lighting',
             description: 'A spherical white desk lamp in silver.'
+        },
+        {
+            id: '3',
+            image: rusticDresser,
+            title: 'Rustic Dresser',
+            price: 449.99,
+            category: 'Storage',
+            description: 'A stylish rustic dresser.'
         }
     ]
 
